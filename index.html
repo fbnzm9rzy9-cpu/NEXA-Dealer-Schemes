@@ -1,124 +1,14 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#0b1635"><title>NEXA Dealer Incentive Portal</title><style>
 :root{--navy:#071735;--blue:#1769e0;--indigo:#4f46e5;--green:#0f9f6e;--orange:#f59e0b;--red:#dc3545;--ink:#101828;--muted:#667085;--line:#e4e9f1;--bg:#f4f7fc}
 *{box-sizing:border-box}html{background:var(--bg);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}body{margin:0;color:var(--ink);background:radial-gradient(circle at 8% 0%,rgba(79,70,229,.12),transparent 28rem),radial-gradient(circle at 95% 15%,rgba(23,105,224,.10),transparent 24rem),linear-gradient(180deg,#eef3fb,#f7f9fc 45%,#f3f6fb);min-height:100vh}.wrap{width:min(1180px,100%);margin:auto;padding:24px 16px 40px}.login-wrap{min-height:100vh;display:grid;place-items:center;padding:24px}.login{width:min(420px,100%);background:rgba(255,255,255,.93);border:1px solid #fff;border-radius:26px;box-shadow:0 24px 70px rgba(16,35,75,.15);padding:30px 24px;position:relative;overflow:hidden}.login:before{content:"";position:absolute;inset:0 0 auto;height:5px;background:linear-gradient(90deg,var(--blue),var(--indigo),#12b981)}.mark{width:62px;height:62px;border-radius:18px;margin:6px auto 14px;display:grid;place-items:center;color:#fff;font-weight:900;background:linear-gradient(135deg,var(--navy),var(--blue),var(--indigo));box-shadow:0 10px 25px rgba(23,105,224,.25)}h1,h2,h3,p{margin:0}.login h1{text-align:center;font-size:24px;color:var(--navy)}.sub{text-align:center;color:var(--muted);font-size:13px;margin:6px 0 22px}.field{margin:12px 0}.field label{display:block;font-size:12px;font-weight:700;color:#344054;margin-bottom:6px}.field input{width:100%;height:48px;border:1px solid #d7deea;border-radius:12px;padding:0 14px;font-size:16px;background:#f9fbfe;outline:none}.field input:focus{border-color:var(--blue);background:#fff;box-shadow:0 0 0 4px rgba(23,105,224,.11)}button{border:0;cursor:pointer;font:inherit}.data-stamp{text-align:center;color:#667085;font-size:9px;margin-top:10px;letter-spacing:.02em}.data-stamp span{font-weight:800;color:#475467}.primary{width:100%;height:48px;border-radius:12px;color:#fff;font-weight:800;background:linear-gradient(135deg,var(--navy),var(--blue),var(--indigo));box-shadow:0 8px 20px rgba(23,105,224,.22);margin-top:6px}.err{display:none;margin:10px 0 4px;padding:10px 12px;background:#fff1f2;color:#b42318;border:1px solid #fecdd3;border-radius:10px;font-size:12px;text-align:center}.top{background:linear-gradient(135deg,var(--navy),#173b79 60%,var(--blue));color:#fff;border-radius:20px;padding:18px 20px;display:flex;gap:16px;justify-content:space-between;align-items:center;box-shadow:0 15px 35px rgba(11,22,53,.18);overflow:hidden;position:relative}.top:after{content:"";position:absolute;width:180px;height:180px;border-radius:50%;right:-70px;top:-95px;background:rgba(255,255,255,.08)}.dealer-title{position:relative;z-index:1}.kicker{font-size:10px;letter-spacing:.12em;font-weight:800;color:#a9c7ff}.dealer-title h2{font-size:22px;margin:3px 0}.disclaimer{font-size:10px;line-height:1.35;color:#dbe8ff;opacity:.88;margin:3px 0 7px;max-width:680px;font-style:italic}.code{display:inline-block;border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.08);border-radius:999px;padding:4px 9px;font-size:11px;color:#dbe8ff}.actions{position:relative;z-index:2;display:flex;gap:8px}.secondary{background:#fff;color:var(--blue);border:1px solid #cbd8eb;padding:9px 13px;border-radius:10px;font-size:12px;font-weight:800}.summary{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:14px 0}.sum{color:#fff;border-radius:16px;padding:15px;box-shadow:0 10px 24px rgba(16,35,75,.10);position:relative;overflow:hidden}.sum.blue{background:linear-gradient(135deg,var(--navy),var(--blue))}.sum.green{background:linear-gradient(135deg,#07553e,var(--green))}.sum.purple{background:linear-gradient(135deg,#2c1a63,#7c3aed)}.sum .lab{font-size:10px;text-transform:uppercase;letter-spacing:.07em;font-weight:800;opacity:.82}.sum .val{font-size:21px;font-weight:900;margin-top:3px}.sum .note{font-size:10px;opacity:.78;margin-top:2px}.toolbar{display:flex;justify-content:space-between;align-items:center;margin:18px 0 8px}.toolbar h3{font-size:17px;color:var(--navy)}.toggle{background:#fff;color:var(--blue);border:1px solid #cbd8eb;padding:8px 11px;border-radius:999px;font-size:11px;font-weight:800}.hint{font-size:11px;color:var(--muted);margin-bottom:10px}.schemes{display:flex;flex-direction:column;gap:10px}.scheme{background:#fff;border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:0 6px 18px rgba(16,35,75,.055)}.scheme summary{list-style:none;padding:13px 14px;color:#fff;cursor:pointer}.scheme summary .status{margin-left:auto;flex:0 0 auto}.scheme summary::-webkit-details-marker{display:none}.scheme:nth-child(1) summary{background:linear-gradient(135deg,#0b1635,#1769e0)}.scheme summary{background:linear-gradient(135deg,#0b1635,#1769e0)}.head{display:flex;align-items:center;gap:9px}.num{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.17);font-size:15px;font-weight:950;flex:0 0 30px;color:#fff;text-shadow:0 0 6px rgba(255,255,255,.95),0 0 14px rgba(111,190,255,.9);box-shadow:0 0 8px rgba(111,190,255,.55),inset 0 0 8px rgba(255,255,255,.12)}.title{font-weight:800;font-size:13px;flex:1}.status{font-size:10px;font-weight:900;border:1px solid rgba(255,255,255,.25);border-radius:999px;padding:4px 7px}.yes{background:rgba(16,185,129,.2);color:#dbfff0}.no{background:rgba(239,68,68,.15);color:#ffe5e5}.chips{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}.chip{flex:1 1 140px;padding:8px 10px;border-radius:10px;display:flex;justify-content:space-between;gap:8px;font-size:10px}.chip b{font-size:12px}.chip.cur{background:rgba(245,158,11,.18)}.chip.pot{background:rgba(15,159,110,.18)}.body{padding:15px;background:linear-gradient(180deg,#fff,#fbfcfe)}.sec{margin-bottom:14px}.sec h4{font-size:10px;text-transform:uppercase;letter-spacing:.05em;color:#2457a6;border-left:3px solid var(--blue);padding-left:7px;margin:0 0 7px}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:6px}.metric{border:1px solid var(--line);background:#f8fafd;border-radius:9px;padding:8px;text-align:center}.metric .l{font-size:9px;color:#667085;font-weight:700;text-transform:uppercase}.metric .v{font-size:14px;font-weight:900;color:#102a56;margin-top:2px}.pos{color:var(--green)!important}.neg{color:var(--red)!important}.gap{color:#d97706!important}.progress{margin:0 0 14px}.pbar{height:8px;background:#e7edf5;border-radius:8px;overflow:hidden}.fill{height:100%;background:linear-gradient(90deg,var(--blue),var(--indigo));border-radius:8px}.table-wrap{overflow:auto;border:1px solid var(--line);border-radius:10px}.tbl{width:100%;border-collapse:collapse;min-width:520px;font-size:10px}.tbl th{background:#eef3f9;color:#526173;padding:8px;text-align:center}.tbl td{border-top:1px solid var(--line);padding:8px;text-align:center}.earn{display:grid;grid-template-columns:1fr 1fr;gap:8px}.tile{border-radius:12px;padding:10px;text-align:center;color:#fff}.tile.cur{background:linear-gradient(135deg,#f59e0b,#ea7b09)}.tile.pot{background:linear-gradient(135deg,#0f9f6e,#087f5b)}.tile .l{font-size:9px;font-weight:800}.tile .v{font-size:17px;font-weight:900;margin-top:2px}.cond{background:#fffaf0;border:1px solid #f5d48a;border-radius:11px;padding:11px 12px;font-style:italic}.cond li{font-style:italic}.cond h4{border:0;color:#a15c12;padding:0;margin-bottom:5px}.cond li{font-size:10px;line-height:1.45;margin:4px 0;color:#814d13}.cond b{font-weight:900}@media(max-width:620px){.summary{grid-template-columns:1fr 1fr}.sum:last-child{grid-column:1/-1}.top{align-items:flex-start}.actions{flex-shrink:0}.dealer-title h2{font-size:18px}.wrap{padding:14px 10px 30px}}@media(max-width:420px){.actions .secondary{padding:8px 10px}.title{font-size:12px}.status{font-size:9px}.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}#splash{position:fixed;inset:0;z-index:9999;display:grid;place-items:center;background:radial-gradient(circle at 50% 45%,#183d79,#071735 65%);color:#fff;animation:splashOut .7s ease 3.00s forwards}.splash-title{text-align:center;font-size:clamp(28px,6vw,52px);font-weight:900;letter-spacing:.04em;animation:titleFade 1.35s ease both}.splash-sub{font-size:11px;letter-spacing:.25em;text-align:center;margin-top:8px;opacity:.7;animation:titleFade 1.35s ease .15s both}.intro-roll{animation:sheetRoll 1.05s cubic-bezier(.2,.85,.25,1.15) 1.75s both;transform-origin:top center}.login-wrap{perspective:1000px}@keyframes titleFade{0%{opacity:0;transform:translateY(14px) scale(.97)}100%{opacity:1;transform:none}}@keyframes sheetRoll{0%{opacity:0;transform:translateY(-95vh) rotateX(-65deg) scale(.96)}60%{opacity:1;transform:translateY(16px) rotateX(5deg) scale(1)}100%{opacity:1;transform:none}}@keyframes splashOut{to{opacity:0;visibility:hidden;pointer-events:none}}
-/* Readability and accessibility refinement — keeps all scheme data and rendering intact */
-html{font-size:16px;scroll-behavior:smooth}
-body{font-size:16px;line-height:1.5;background:#f4f7fc}
-.wrap{padding:28px 20px 44px}
-.login{border-radius:22px;box-shadow:0 14px 36px rgba(16,35,75,.10);padding:32px 26px}
-.login:before{background:var(--blue)}
-.mark{border-radius:15px;background:var(--navy);box-shadow:none}
-.login h1{font-size:26px;line-height:1.25}
-.sub{font-size:14px;line-height:1.5;margin:8px 0 24px}
-.field{margin:16px 0}
-.field label{font-size:14px;margin-bottom:8px}
-.field input{min-height:50px;font-size:16px}
-.primary,.secondary,.toggle{min-height:44px}
-.primary{background:var(--blue);box-shadow:none;font-size:15px}
-.data-stamp{font-size:11px;margin-top:14px}
-.top{background:var(--navy);border-radius:16px;box-shadow:0 5px 16px rgba(16,35,75,.08);padding:22px 24px}
-.top:after{display:none}
-.kicker{font-size:11px;letter-spacing:.09em}
-.dealer-title h2{font-size:26px;line-height:1.25;margin:5px 0 8px}
-.disclaimer{font-size:13px;line-height:1.5;max-width:720px}
-.code{font-size:13px}
-.secondary{padding:10px 16px;border-radius:10px}
-.summary{gap:14px;margin:18px 0 24px}
-.sum{border-radius:14px;padding:18px;box-shadow:none}
-.sum.blue{background:#12376b}
-.sum.green{background:#116b50}
-.sum.purple{background:#4b3283}
-.sum .lab{font-size:12px;letter-spacing:.04em}
-.sum .val{font-size:30px;line-height:1.2;margin-top:6px;font-variant-numeric:tabular-nums}
-.sum .note{font-size:12px;line-height:1.45;margin-top:5px}
-.toolbar{margin:26px 0 10px}
-.toolbar h3{font-size:20px}
-.toggle{padding:10px 16px;font-size:13px;background:#fff;border-color:#b8c7dc}
-.hint{font-size:14px;line-height:1.5;margin-bottom:16px}
-.schemes{gap:14px}
-.scheme{border-radius:14px;box-shadow:0 2px 8px rgba(16,35,75,.04)}
-.scheme summary{padding:16px 18px;background:var(--navy)}
-.scheme:nth-child(1) summary,.scheme summary{background:var(--navy)}
-.head{gap:12px}
-.num{width:34px;height:34px;flex-basis:34px;font-size:15px;text-shadow:none;box-shadow:none;background:#29476f}
-.title{font-size:15px;line-height:1.4}
-.status{font-size:12px;padding:5px 9px}
-.chips{gap:8px;margin-top:10px}
-.chip{padding:10px 12px;font-size:12px}
-.chip b{font-size:14px}
-.body{padding:20px;background:#fff}
-.sec{margin-bottom:20px}
-.sec h4{font-size:12px;letter-spacing:.04em;margin-bottom:10px}
-.grid{gap:10px}
-.metric{border-radius:10px;padding:12px;background:#f7f9fc}
-.metric .l{font-size:11px;line-height:1.4}
-.metric .v{font-size:18px;line-height:1.3;margin-top:5px;font-variant-numeric:tabular-nums}
-.progress{margin-bottom:20px}
-.pbar{height:10px;background:#e5eaf2}
-.fill{background:var(--blue)}
-.table-wrap{border-radius:10px}
-.tbl{font-size:12px}
-.tbl th{padding:10px;background:#edf2f8}
-.tbl td{padding:10px}
-.earn{gap:10px}
-.tile{border-radius:10px;padding:14px}
-.tile.cur{background:#a95c08}
-.tile.pot{background:#116b50}
-.tile .l{font-size:11px;line-height:1.4}
-.tile .v{font-size:22px;line-height:1.3;margin-top:5px}
-.cond{background:#fffaf0;border-color:#ead7a6;border-radius:10px;padding:14px}
-.cond h4{font-size:13px}
-.cond li{font-size:13px;line-height:1.6;margin:7px 0;color:#63410f}
-button,input,summary{-webkit-tap-highlight-color:transparent}
+/* Keep accessibility essentials without changing the original visual design. */
 button:focus-visible,input:focus-visible,summary:focus-visible{outline:3px solid #76a9fa;outline-offset:3px}
-#splash{background:#0b1635}
-.splash-title{font-size:clamp(26px,5vw,46px)}
-/* The intro runs once per browser; subsequent visits open directly at login. */
-.skip-intro #splash{display:none!important;animation:none!important}
-.skip-intro .intro-roll{animation:none!important;transform:none!important;opacity:1!important}
-@media(max-width:620px){
-  .wrap{padding:16px 12px 32px}
-  .login-wrap{padding:18px}
-  .login{padding:28px 22px}
-  .top{padding:18px 16px;gap:12px}
-  .dealer-title h2{font-size:22px}
-  .disclaimer{font-size:12px}
-  .summary{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:14px 0 22px}
-  .sum{padding:14px}
-  .sum:last-child{grid-column:auto}
-  .sum .lab{font-size:11px}
-  .sum .val{font-size:26px}
-  .toolbar{margin-top:22px}
-  .toolbar h3{font-size:19px}
-  .hint{font-size:14px}
-  .scheme summary{padding:14px 12px}
-  .head{gap:8px;flex-wrap:wrap}
-  .title{font-size:14px;min-width:120px}
-  .status{font-size:11px;margin-left:auto}
-  .body{padding:16px 12px}
-  .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
-  .metric{padding:10px 8px}
-  .metric .l{font-size:11px}
-  .metric .v{font-size:17px}
-  .chip{flex-basis:100%;font-size:12px}
-  .tile .v{font-size:20px}
-  .secondary{padding:9px 12px}
-  .tbl{min-width:480px;font-size:11px}
-}
-@media(max-width:380px){
-  .summary{grid-template-columns:1fr}
-  .sum:last-child{grid-column:auto}
-  .actions .secondary{padding:8px 10px}
-  .title{font-size:13px}
-  .status{font-size:10px}
-  .grid{grid-template-columns:repeat(2,minmax(0,1fr))}
-}
+.primary,.secondary,.toggle{min-height:44px}
 @media(prefers-reduced-motion:reduce){
   *,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
   #splash{display:none!important;animation:none!important}
   .intro-roll{animation:none!important;transform:none!important;opacity:1!important}
 }
-
 </style>
 <script>
 (function(){
