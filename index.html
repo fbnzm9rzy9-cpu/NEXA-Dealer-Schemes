@@ -499,3 +499,8 @@ document.getElementById("toggle").onclick=()=>{const ds=[...document.querySelect
 #summary .sum.blue,#summary .sum.green{aspect-ratio:1/1;display:flex;flex-direction:column;justify-content:center;min-width:0}
 @media(max-width:620px){#summary{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}#summary .sum.blue,#summary .sum.green{aspect-ratio:1/1;padding:12px}#summary .sum.blue .val,#summary .sum.green .val{font-size:clamp(16px,4.7vw,21px);overflow-wrap:anywhere}}
 </style>
+
+<style>
+/* Refine only the orange and green summary cards on the dashboard. */
+@media(max-width:620px){#summary .sum.blue,#summary .sum.green{aspect-ratio:1.18/1;padding:10px 8px;text-align:center;align-items:center;justify-content:center}#summary .sum.blue .lab,#summary .sum.green .lab{text-align:center;width:100%}#summary .sum.blue .val,#summary .sum.green .val{font-size:clamp(19px,5.5vw,25px);text-align:center;width:100%;white-space:nowrap;overflow-wrap:normal}}
+</style>
