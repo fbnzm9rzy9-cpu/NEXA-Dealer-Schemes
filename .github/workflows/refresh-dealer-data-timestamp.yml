@@ -1,0 +1,58 @@
+name: Refresh dealer data timestamp
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - index.html
+
+permissions:
+  contents: write
+
+jobs:
+  update-data-timestamp:
+    if: >-
+      contains(github.event.head_commit.message, 'Update dealer scheme data') ||
+      contains(github.event.head_commit.message, 'Update dealer data') ||
+      contains(github.event.head_commit.message, 'Refresh dealer data') ||
+      contains(github.event.head_commit.message, 'Excel')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out portal
+        uses: actions/checkout@v4
+        with:
+          ref: main
+      - name: Stamp the data publication time
+        run: |
+          python3 - <<'PY'
+          from datetime import datetime
+          from zoneinfo import ZoneInfo
+          from pathlib import Path
+          import re
+
+          path = Path("index.html")
+          html = path.read_text(encoding="utf-8")
+          stamp = datetime.now(ZoneInfo("Asia/Kolkata")).strftime("%d %b %Y, %I:%M %p")
+          updated, count = re.subn(
+              r'(Data last updated: <span>)[^<]*(</span>)',
+              lambda match: match.group(1) + stamp + match.group(2),
+              html,
+              count=1
+          )
+          if count != 1:
+              raise SystemExit("Could not find exactly one data freshness indicator.")
+          path.write_text(updated, encoding="utf-8")
+          print(f"Data publication timestamp set to {stamp} (Asia/Kolkata)")
+          PY
+      - name: Commit timestamp
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          if git diff --cached --quiet; then
+            echo "Timestamp already current; no commit needed."
+            exit 0
+          fi
+          git commit -m "Update dealer data publication timestamp"
+          git push origin main
