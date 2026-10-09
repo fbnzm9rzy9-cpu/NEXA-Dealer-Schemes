@@ -493,3 +493,9 @@ document.getElementById("toggle").onclick=()=>{const ds=[...document.querySelect
 .vahan-scheme .sec:first-child .metric:nth-child(2),.vahan-scheme .sec:first-child .metric:nth-child(3),.vahan-scheme .sec:first-child .metric:nth-child(4){grid-column:span 2}
 @media(max-width:480px){.vahan-scheme .sec:first-child .grid{grid-template-columns:repeat(6,minmax(0,1fr))}.vahan-scheme .sec:first-child .metric{min-width:0;padding:8px 4px}.vahan-scheme .sec:first-child .metric .l{font-size:9px}.vahan-scheme .sec:first-child .metric .v{font-size:14px}}
 </style>
+
+<style>
+/* Keep the orange and green summary cards square; leave the Vahan achievement card untouched. */
+#summary .sum.blue,#summary .sum.green{aspect-ratio:1/1;display:flex;flex-direction:column;justify-content:center;min-width:0}
+@media(max-width:620px){#summary{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}#summary .sum.blue,#summary .sum.green{aspect-ratio:1/1;padding:12px}#summary .sum.blue .val,#summary .sum.green .val{font-size:clamp(16px,4.7vw,21px);overflow-wrap:anywhere}}
+</style>
