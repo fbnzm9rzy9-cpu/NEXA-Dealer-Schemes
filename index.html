@@ -28,6 +28,56 @@ button:focus-visible,input:focus-visible,summary:focus-visible{outline:3px solid
 
 @media(max-width:480px){.login-wrap{padding:18px 14px}.login{width:100%;padding:24px 18px;border-radius:22px}.brand-lockup .ddp-logo{width:92px}.brand-lockup h1{font-size:23px}.field label{font-size:13px}.data-stamp{font-size:10px}}
 @media(prefers-reduced-motion:reduce){#splash{display:none!important;animation:none!important}#loginPage{opacity:1;animation:none!important}.ddp-logo .ring{stroke-dashoffset:0;animation:none!important}.ddp-logo .letters,.ddp-logo .orbit-text{opacity:1;animation:none!important}}
+
+/* DDP visual refresh: NEXA-inspired midnight blue, electric blue and silver. */
+:root{--navy:#07152f;--blue:#1264d8;--indigo:#4b48c8;--green:#16865b;--orange:#e98518;--red:#d9364f;--ink:#101d35;--muted:#66758c;--line:#dce5f1;--bg:#edf2f9}
+html{background:#edf2f9}
+body{background:radial-gradient(ellipse at 10% 0%,rgba(35,92,188,.14),transparent 35rem),radial-gradient(ellipse at 100% 10%,rgba(73,73,194,.12),transparent 30rem),linear-gradient(180deg,#edf2f9 0%,#f8faff 50%,#e9eff8 100%)}
+.login-wrap{min-height:100svh;padding:26px 16px;display:grid;place-items:center;background:radial-gradient(ellipse at 50% 35%,rgba(26,94,191,.10),transparent 32rem)}
+.login{width:min(430px,100%);padding:30px 25px 24px;background:linear-gradient(155deg,rgba(255,255,255,.98),rgba(245,249,255,.97));border:1px solid #d5e0f0;border-radius:24px;box-shadow:0 24px 70px rgba(7,21,47,.18);overflow:hidden}
+.login:before{display:none}
+.brand-lockup{width:100%;gap:0;margin:0 auto 22px}
+.brand-lockup .ddp-logo{width:clamp(88px,26vw,112px);max-width:100%;margin:0 auto 12px;filter:drop-shadow(0 7px 14px rgba(9,36,81,.18))}
+.brand-lockup h1{font-size:clamp(22px,6vw,28px);line-height:1.18;text-align:center;letter-spacing:-.035em;color:#0a1d42;max-width:100%;overflow-wrap:anywhere}
+.field{margin:14px 0}
+.field label{font-size:12px;color:#203654}
+.field input{height:49px;background:#f7faff;border-color:#cbd7e8;border-radius:11px;color:#102447}
+.field input:focus{border-color:#1769e0;box-shadow:0 0 0 3px rgba(18,100,216,.13)}
+.primary{background:linear-gradient(105deg,#092c68,#1264d8 62%,#354fd1);box-shadow:0 8px 20px rgba(18,100,216,.23);border-radius:11px}
+.data-stamp{font-size:10px;color:#71809a;margin-top:13px}
+.data-stamp span{color:#173c75}
+#splash{background:radial-gradient(ellipse at 50% 42%,#163d7a 0%,#0a2047 42%,#050e21 100%);overflow:hidden}
+#splash:before,#splash:after{content:"";position:absolute;left:50%;top:50%;border:1px solid rgba(91,157,255,.23);border-radius:50%;transform:translate(-50%,-50%);pointer-events:none}
+#splash:before{width:min(88vw,520px);aspect-ratio:1;animation:haloIn 1.1s ease .25s both}
+#splash:after{width:min(72vw,420px);aspect-ratio:1;border-color:rgba(239,183,80,.24);animation:haloIn 1s ease .55s both}
+.splash-brand{position:relative;z-index:1;width:min(90vw,500px);padding:22px 12px;text-align:center}
+#splash .ddp-logo{width:clamp(124px,36vw,190px);max-width:100%;margin:0 auto 20px;filter:drop-shadow(0 0 18px rgba(241,184,75,.25))}
+#splash .splash-title{font-size:clamp(19px,5vw,31px);line-height:1.2;letter-spacing:.09em;text-align:center;color:#f4f7ff}
+#splash .splash-sub{font-size:clamp(9px,2.4vw,11px);letter-spacing:.2em;text-align:center;color:#b9cce9;margin-top:10px}
+#splash .ddp-logo circle:first-of-type{transform-origin:center;animation:badgeIn .95s cubic-bezier(.2,.8,.2,1) .15s both}
+@keyframes haloIn{from{opacity:0;transform:translate(-50%,-50%) scale(.65)}to{opacity:1;transform:translate(-50%,-50%) scale(1)}}
+@keyframes badgeIn{from{opacity:0;transform:translate(-42vw,18vh) rotate(-28deg)}to{opacity:1;transform:none}}
+.top{background:linear-gradient(120deg,#07152f 0%,#0b3472 58%,#155fd0 100%);border:1px solid rgba(255,255,255,.12);box-shadow:0 14px 32px rgba(7,21,47,.2)}
+.kicker{color:#b9d4ff}
+.code{border-color:rgba(255,255,255,.26);background:rgba(255,255,255,.1)}
+.sum{box-shadow:0 9px 20px rgba(7,21,47,.12)}
+.sum.blue{background:linear-gradient(125deg,#e98216,#f3a02c 72%,#d76d0d)}
+.sum.green{background:linear-gradient(125deg,#08734d,#16a06a 72%,#086647)}
+.sum.purple{background:linear-gradient(125deg,#101f43,#244b91)}
+.scheme{border-color:#d7e1ef;box-shadow:0 5px 16px rgba(7,21,47,.07)}
+.scheme summary,.scheme:nth-child(1) summary{background:linear-gradient(110deg,#081a39,#123f85 66%,#1769e0)}
+.scheme summary .num{background:rgba(255,255,255,.13);text-shadow:none;box-shadow:inset 0 0 0 1px rgba(255,255,255,.15)}
+.sec h4{color:#174f9b;border-left-color:#1769e0}
+.metric{background:#f6f9fe;border-color:#dbe5f1}
+.metric .v{color:#0d2b59}
+.tile.cur{background:linear-gradient(125deg,#e98216,#f3a02c)}
+.tile.pot{background:linear-gradient(125deg,#08734d,#16a06a)}
+.toggle,.secondary{color:#104c9e;border-color:#c4d5ed}
+.cond{background:#f7faff;border-color:#cfdbed}
+.cond h4{color:#194d8e}
+@media(max-width:620px){.login-wrap{padding:18px 14px}.login{padding:25px 18px 22px}.brand-lockup{margin-bottom:18px}.summary{grid-template-columns:1fr 1fr}.sum:last-child{grid-column:1/-1}}
+@media(max-width:380px){.login{padding:22px 15px}.brand-lockup h1{font-size:21px}.brand-lockup .ddp-logo{width:84px}.splash-brand{padding:16px 8px}}
+@media(prefers-reduced-motion:reduce){#splash:before,#splash:after{animation:none!important}}
 </style>
 <script>/* Always play the branded intro on a fresh page load so the animation is visible on every visit. */</script>
 </head><body>
