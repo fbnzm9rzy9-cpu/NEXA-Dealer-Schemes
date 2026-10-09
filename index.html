@@ -381,4 +381,27 @@ document.getElementById("toggle").onclick=()=>{const ds=[...document.querySelect
 @media(max-width:620px){
  .header-right .actions{bottom:0}
 }
+
+/* Prevent header contents from overlapping: keep logo and Logout in normal flow */
+.top{align-items:stretch!important;gap:24px!important}
+.dealer-title{flex:1 1 auto;min-width:0}
+.dealer-name-line{display:flex;align-items:center;flex-wrap:wrap;gap:10px}
+.dealer-title .disclaimer{max-width:100%;overflow-wrap:anywhere}
+.header-right{position:relative;align-self:stretch;display:flex;flex:0 0 auto;flex-direction:column;align-items:center;justify-content:space-between;gap:14px;min-width:145px;max-width:none}
+.header-right .nexa-official-logo{display:block;position:static;margin:0;flex:0 0 auto;max-width:100%;max-height:58px;object-fit:contain}
+.header-right .actions{position:static;right:auto;bottom:auto;margin-top:auto;flex:0 0 auto}
+.header-right .secondary{white-space:nowrap}
+@media(max-width:620px){
+ .top{align-items:stretch!important;gap:16px!important}
+ .header-right{min-width:96px;max-width:108px;gap:12px}
+ .header-right .nexa-official-logo{width:100%;max-height:38px}
+ .header-right .secondary{padding:8px 10px;font-size:11px}
+ .dealer-name-line{gap:6px}
+ .dealer-title .disclaimer{overflow-wrap:anywhere}
+}
+@media(max-width:390px){
+ .top{gap:10px!important;padding:15px 12px!important}
+ .header-right{min-width:78px;max-width:82px}
+ .header-right .secondary{padding:7px 8px;font-size:10px}
+}
 </style>
