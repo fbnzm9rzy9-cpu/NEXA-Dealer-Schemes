@@ -305,7 +305,8 @@ function render(d){
  card(6,"gvsc","Grand Vitara Strong Hybrid Super Cashback",chips(h.cur,h.pot),progress(h.ach,h.tgt,"Achievement vs Target")+sec("Achievement",grid([metric("Target",h.tgt),metric("Achievement",h.ach),metric("Achi %",h.pct,"pct")]))+earnings(h.cur,h.pot),h.qual),
  card(7,"tdd","Dealer Trade Discount Scheme – October",chips(t.cur,t.pot),progress(t.ach,t.tgt,"GV Retail Achievement vs Target")+sec("GV Retail",grid([metric("GV Retail Target",t.tgt),metric("Achievement",t.ach),metric("Achi %",t.pct,"pct")]))+sec("GV Wholesale",grid([metric("Wholesale Target",t.wsTgt),metric("Wholesale Achievement",t.wsAch),metric("Wholesale Achi %",t.wsAchi2,"pct")]))+sec("WS Payout",grid([metric("GV Sigma",t.sig),metric("GV Delta",t.dlt)]))+earnings(t.cur,t.pot),t.qual)
  ];
- return `<section class="scheme-category"><h4 class="category-heading">A. HO Schemes</h4>${cards[1]}${cards[2]}</section><section class="scheme-category"><h4 class="category-heading">B. RO/ZO Schemes</h4>${cards[0]}${cards[3]}${cards[4]}${cards[5]}${cards[6]}</section>`
+ const renumber=(html,num)=>html.replace(/(<span class="num">)\\d+(<\\/span>)/,`$1${num}$2`);
+ return `<section class="scheme-category"><h4 class="category-heading">A. HO Schemes</h4>${renumber(cards[1],1)}${renumber(cards[2],2)}</section><section class="scheme-category"><h4 class="category-heading">B. RO/ZO Schemes</h4>${renumber(cards[0],1)}${renumber(cards[3],2)}${renumber(cards[4],3)}${renumber(cards[5],4)}${renumber(cards[6],5)}</section>`
 }
 function login(e){e.preventDefault();const code=document.getElementById("code").value.trim().toUpperCase(),pwd=document.getElementById("pwd").value.trim(),d=DEALERS[code],err=document.getElementById("err");if(!d||d.password!==pwd){err.textContent="Invalid Dealer Code or Password.";err.style.display="block";return}err.style.display="none";document.getElementById("loginPage").style.display="none";document.getElementById("app").style.display="block";document.getElementById("dealerName").textContent=d.name;document.getElementById("dealerCode").textContent=d.code;const arr=[d.vahan,d.pp,d.psl,d.nac,d.mega,d.gvsc,d.tdd];const cur=arr.reduce((s,x)=>s+(typeof x.cur==="number"?x.cur:0),0);const pot=arr.reduce((s,x)=>s+(typeof x.pot==="number"?x.pot:0),0);const ach=typeof d.vahan.ach==="number"&&typeof d.vahan.tgt==="number"&&d.vahan.tgt?d.vahan.ach/d.vahan.tgt:0;document.getElementById("summary").innerHTML='<div class="sum blue"><div class="lab">Current Earnings</div><div class="val">'+fmt(cur,"cur")+'</div></div><div class="sum green"><div class="lab">Earning Potential</div><div class="val">'+fmt(pot,"cur")+'</div></div><div class="sum purple"><div class="lab">Vahan Achievement</div><div class="val">'+fmt(ach,"pct")+'</div><div class="note">'+fmt(d.vahan.ach)+' / '+fmt(d.vahan.tgt)+'</div></div>';document.getElementById("schemes").innerHTML=render(d);document.querySelectorAll("details.scheme").forEach(x=>x.open=false);document.getElementById("toggle").textContent="Expand all";window.scrollTo(0,0)}
 document.getElementById("loginForm").addEventListener("submit",login);
@@ -412,4 +413,16 @@ document.getElementById("toggle").onclick=()=>{const ds=[...document.querySelect
 .scheme summary .status.yes{background:rgba(34,197,94,.11);border-color:rgba(74,222,128,.26);color:#a7f3c0}
 .scheme summary .status.no{background:rgba(248,113,113,.10);border-color:rgba(248,113,113,.24);color:#ffc4c4}
 @media(max-width:620px){.category-heading{padding:9px 11px;font-size:11px}.scheme-category{gap:9px;margin-bottom:15px}}
+
+/* Clearer category-specific serial badges */
+.scheme-category:first-of-type .scheme:nth-of-type(2) summary .num{background:linear-gradient(145deg,#8a5bda,#55339c)!important;border-color:#c4a8ff!important;color:#fff!important}
+.scheme-category:first-of-type .scheme:nth-of-type(3) summary .num{background:linear-gradient(145deg,#0d9470,#075d4b)!important;border-color:#72e0bb!important;color:#fff!important}
+.scheme-category:nth-of-type(2) .scheme:nth-of-type(2) summary .num{background:linear-gradient(145deg,#1769e0,#10428f)!important;border-color:#86b8ff!important;color:#fff!important}
+.scheme-category:nth-of-type(2) .scheme:nth-of-type(3) summary .num{background:linear-gradient(145deg,#bd7a19,#81500e)!important;border-color:#ffd27b!important;color:#fff!important}
+.scheme-category:nth-of-type(2) .scheme:nth-of-type(4) summary .num{background:linear-gradient(145deg,#c23f68,#812644)!important;border-color:#ffabc2!important;color:#fff!important}
+.scheme-category:nth-of-type(2) .scheme:nth-of-type(5) summary .num{background:linear-gradient(145deg,#087f91,#075365)!important;border-color:#82e7f0!important;color:#fff!important}
+.scheme-category:nth-of-type(2) .scheme:nth-of-type(6) summary .num{background:linear-gradient(145deg,#53657e,#35455d)!important;border-color:#b1c3dc!important;color:#fff!important}
+/* Stronger but tasteful qualification colors for quick recognition */
+.scheme summary .status.yes{background:rgba(34,197,94,.22)!important;border-color:rgba(74,222,128,.65)!important;color:#86efac!important;box-shadow:inset 0 0 0 1px rgba(74,222,128,.08)}
+.scheme summary .status.no{background:rgba(239,68,68,.22)!important;border-color:rgba(248,113,113,.7)!important;color:#fca5a5!important;box-shadow:inset 0 0 0 1px rgba(248,113,113,.08)}
 </style>
