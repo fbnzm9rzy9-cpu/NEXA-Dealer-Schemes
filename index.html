@@ -293,7 +293,7 @@ function table(head,rows){return '<div class="table-wrap"><table class="tbl"><th
 function earnings(c,p){return sec("Earnings",'<div class="earn"><div class="tile cur"><div class="l">Current Earnings</div><div class="v">'+fmt(c,"cur")+'</div></div><div class="tile pot"><div class="l">Earning Potential</div><div class="v">'+fmt(p,"cur")+'</div></div></div>')}
 function chips(c,p){return '<div class="chips"><div class="chip cur"><span>Current</span><b>'+fmt(c,"cur")+'</b></div><div class="chip pot"><span>Potential</span><b>'+fmt(p,"cur")+'</b></div></div>'}
 function conditions(k){const items=CONDITIONS[k]||[];return '<div class="cond"><h4>Scheme Conditions</h4><ul>'+items.map(c=>c.h?'<li><b>'+safe(c.h)+'</b></li>':'<li>'+(c.l?'<b>'+safe(c.l)+':</b> ':'')+safe(c.t)+'</li>').join('')+'</ul></div>'}
-function card(n,key,title,head,body,status){const yes=String(status).toLowerCase()==="qualified";return `<details class="scheme"><summary><div class="head"><span class="num">${n}</span><span class="title">${safe(title)}</span><span class="status ${yes?"yes":"no"}">${yes?"Qualified":"Not Qualified"}</span></div>${head}</summary><div class="body">${body}${conditions(key)}</div></details>`}
+function card(n,key,title,head,body,status){const yes=String(status).toLowerCase()==="qualified";return `<details class="scheme ${key==="vahan"?"vahan-scheme":""}"><summary><div class="head"><span class="num">${n}</span><span class="title">${safe(title)}</span><span class="status ${yes?"yes":"no"}">${yes?"Qualified":"Not Qualified"}</span></div>${head}</summary><div class="body">${body}${conditions(key)}</div></details>`}
 function render(d){
  const v=d.vahan,p=d.pp,s=d.psl,n=d.nac,g=d.mega,h=d.gvsc,t=d.tdd;
  const cards = [
@@ -484,4 +484,12 @@ document.getElementById("toggle").onclick=()=>{const ds=[...document.querySelect
 
 <style>
 .vahan-status{font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#e6bd82;margin:0 0 7px;line-height:1.25}
+</style>
+
+<style>
+/* Vahan scheme layout only: target and gap span full width; three middle metrics share the row. */
+.vahan-scheme .sec:first-child .grid{grid-template-columns:repeat(6,minmax(0,1fr))}
+.vahan-scheme .sec:first-child .metric:nth-child(1),.vahan-scheme .sec:first-child .metric:nth-child(5){grid-column:1/-1}
+.vahan-scheme .sec:first-child .metric:nth-child(2),.vahan-scheme .sec:first-child .metric:nth-child(3),.vahan-scheme .sec:first-child .metric:nth-child(4){grid-column:span 2}
+@media(max-width:480px){.vahan-scheme .sec:first-child .grid{grid-template-columns:repeat(6,minmax(0,1fr))}.vahan-scheme .sec:first-child .metric{min-width:0;padding:8px 4px}.vahan-scheme .sec:first-child .metric .l{font-size:9px}.vahan-scheme .sec:first-child .metric .v{font-size:14px}}
 </style>
