@@ -510,3 +510,9 @@ document.getElementById("toggle").onclick=()=>{const ds=[...document.querySelect
 @media(max-width:620px){#summary .sum.blue,#summary .sum.green{aspect-ratio:1.35/1;padding:8px 6px;gap:0}#summary .sum.blue .lab,#summary .sum.green .lab{font-size:clamp(8px,2.4vw,11px);letter-spacing:.045em;line-height:1.2}#summary .sum.blue .val,#summary .sum.green .val{font-size:clamp(20px,6.2vw,30px);line-height:1.15;margin-top:7px;letter-spacing:-.035em;white-space:nowrap}}
 @media(min-width:621px){#summary .sum.blue,#summary .sum.green{aspect-ratio:1.5/1;padding:14px;text-align:center;align-items:center;justify-content:center}#summary .sum.blue .val,#summary .sum.green .val{font-size:clamp(28px,3vw,42px)}}
 </style>
+
+<style>
+/* Balance the card padding around the text: compact height, equal visual breathing room. */
+@media(max-width:620px){#summary .sum.blue,#summary .sum.green{aspect-ratio:1.55/1;padding:8px 7px;justify-content:center;align-items:center;text-align:center}#summary .sum.blue .lab,#summary .sum.green .lab{margin:0;line-height:1.15}#summary .sum.blue .val,#summary .sum.green .val{margin-top:5px;line-height:1.1;font-size:clamp(20px,6.2vw,29px);letter-spacing:-.035em}}
+@media(min-width:621px){#summary .sum.blue,#summary .sum.green{aspect-ratio:1.75/1;padding:12px;justify-content:center;align-items:center;text-align:center}#summary .sum.blue .val,#summary .sum.green .val{font-size:clamp(28px,3vw,42px);margin-top:6px}}
+</style>
