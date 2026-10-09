@@ -504,3 +504,9 @@ document.getElementById("toggle").onclick=()=>{const ds=[...document.querySelect
 /* Refine only the orange and green summary cards on the dashboard. */
 @media(max-width:620px){#summary .sum.blue,#summary .sum.green{aspect-ratio:1.18/1;padding:10px 8px;text-align:center;align-items:center;justify-content:center}#summary .sum.blue .lab,#summary .sum.green .lab{text-align:center;width:100%}#summary .sum.blue .val,#summary .sum.green .val{font-size:clamp(19px,5.5vw,25px);text-align:center;width:100%;white-space:nowrap;overflow-wrap:normal}}
 </style>
+
+<style>
+/* Compact the two earnings cards and scale amounts to the available card width. */
+@media(max-width:620px){#summary .sum.blue,#summary .sum.green{aspect-ratio:1.35/1;padding:8px 6px;gap:0}#summary .sum.blue .lab,#summary .sum.green .lab{font-size:clamp(8px,2.4vw,11px);letter-spacing:.045em;line-height:1.2}#summary .sum.blue .val,#summary .sum.green .val{font-size:clamp(20px,6.2vw,30px);line-height:1.15;margin-top:7px;letter-spacing:-.035em;white-space:nowrap}}
+@media(min-width:621px){#summary .sum.blue,#summary .sum.green{aspect-ratio:1.5/1;padding:14px;text-align:center;align-items:center;justify-content:center}#summary .sum.blue .val,#summary .sum.green .val{font-size:clamp(28px,3vw,42px)}}
+</style>
