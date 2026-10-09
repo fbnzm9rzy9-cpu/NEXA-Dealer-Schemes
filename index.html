@@ -105,6 +105,45 @@ body{background:radial-gradient(ellipse at 10% 0%,rgba(35,92,188,.14),transparen
 @keyframes orbitSettle{0%{opacity:0;transform:translateY(24px)}100%{opacity:1;transform:none}}
 @media(max-width:480px){.login-wrap{padding:20px 14px}.login{padding:25px 18px 21px}.brand-lockup h1{font-size:clamp(22px,6vw,27px)}}
 @media(prefers-reduced-motion:reduce){.ddp-logo .ring{stroke-dashoffset:0;animation:none!important}.ddp-logo .letters,.ddp-logo .orbit-text{opacity:1;animation:none!important}}
+
+/* NEXA BLACK theme: restrained black, graphite and electric-blue accents. */
+:root{--navy:#05070b;--blue:#1769e0;--indigo:#344bd1;--green:#137a52;--orange:#e98518;--red:#dc3545;--ink:#11151c;--muted:#8b96a8;--line:#303744;--bg:#0b0e13}
+html{background:#080a0f;color-scheme:dark}
+body{background:radial-gradient(ellipse at 50% -10%,rgba(30,73,142,.22),transparent 38rem),linear-gradient(180deg,#080a0f,#10141c 60%,#080a0f);color:#e9edf5}
+.top{background:linear-gradient(115deg,#05070b,#111722 65%,#12336b);border:1px solid #293343;box-shadow:0 14px 32px rgba(0,0,0,.3)}
+.kicker{color:#8cbaff}
+.code{background:#151b25;border-color:#354052;color:#dce8fb}
+.summary{gap:10px}
+.sum{border:1px solid rgba(255,255,255,.08);box-shadow:0 8px 20px rgba(0,0,0,.2)}
+.sum.blue{background:linear-gradient(125deg,#151a23,#252d3a)}
+.sum.green{background:linear-gradient(125deg,#101a18,#1c332c)}
+.sum.purple{background:linear-gradient(125deg,#121821,#1b2b47)}
+.scheme{background:#11151c;border:1px solid #2b323e;box-shadow:0 7px 20px rgba(0,0,0,.2)}
+.scheme summary,.scheme:nth-child(1) summary{background:linear-gradient(105deg,#080a0f,#171e29 70%,#12356c);border-bottom:1px solid #2c3544}
+.scheme summary .num{background:#0b1018;border:1px solid #4c596d;box-shadow:inset 0 1px 2px rgba(255,255,255,.12);text-shadow:none;color:#fff}
+.scheme:nth-of-type(1) summary .num{background:#1769e0;border-color:#6aa4ff}
+.scheme:nth-of-type(2) summary .num{background:#a86a16;border-color:#f1bd66}
+.scheme:nth-of-type(3) summary .num{background:#16805a;border-color:#6ed9ae}
+.scheme:nth-of-type(4) summary .num{background:#7650c8;border-color:#b7a0ff}
+.scheme:nth-of-type(5) summary .num{background:#bd4264;border-color:#ff9bb5}
+.scheme:nth-of-type(6) summary .num{background:#087e91;border-color:#71d8e5}
+.scheme:nth-of-type(7) summary .num{background:#53657e;border-color:#b1c3dc}
+.scheme summary .status{background:rgba(255,255,255,.055);border-color:#455166;color:#dce7f8}
+.sec h4{color:#8dbbff;border-left-color:#1769e0}
+.metric{background:#171d27;border-color:#303949;color:#dbe3f0}
+.metric .v{color:#f5f7fb}
+.metric .l{color:#9da9bc}
+.tile.cur{background:linear-gradient(125deg,#a95c0e,#e98518);color:#fff}
+.tile.pot{background:linear-gradient(125deg,#07583b,#16865b);color:#fff}
+.toggle,.secondary{background:#141a24;color:#bcd5fb;border-color:#34445d}
+.cond{background:#141922;border-color:#303949;color:#dce3ef}
+.cond h4{color:#91bbff}
+.table-wrap,table{background:#10151d;color:#e4eaf4}
+th{background:#1a2331;color:#b9d5ff}
+td,th{border-color:#303949}
+input,select{background:#111722;color:#edf3ff;border-color:#354154}
+button:focus-visible,input:focus-visible,summary:focus-visible{outline:3px solid #67a6ff;outline-offset:3px}
+@media(max-width:620px){.scheme{border-radius:17px}.scheme summary{background:linear-gradient(105deg,#080a0f,#171e29 70%,#12356c)}}
 </style>
 <script>/* Always play the branded intro on a fresh page load so the animation is visible on every visit. */</script>
 </head><body>
