@@ -425,4 +425,20 @@ document.getElementById("toggle").onclick=()=>{const ds=[...document.querySelect
 /* Stronger but tasteful qualification colors for quick recognition */
 .scheme summary .status.yes{background:rgba(34,197,94,.22)!important;border-color:rgba(74,222,128,.65)!important;color:#86efac!important;box-shadow:inset 0 0 0 1px rgba(74,222,128,.08)}
 .scheme summary .status.no{background:rgba(239,68,68,.22)!important;border-color:rgba(248,113,113,.7)!important;color:#fca5a5!important;box-shadow:inset 0 0 0 1px rgba(248,113,113,.08)}
+
+/* Category headers only — keep scheme card colors unchanged */
+.scheme-category:first-of-type>.category-heading{
+ background:linear-gradient(105deg,#1c2940 0%,#263d5e 100%);
+ border:1px solid rgba(143,177,225,.38);
+ border-left:4px solid #a7c8ff;
+ color:#edf4ff;
+ box-shadow:inset 0 1px 0 rgba(255,255,255,.04);
+}
+.scheme-category:nth-of-type(2)>.category-heading{
+ background:linear-gradient(105deg,#17352f 0%,#1e4a43 100%);
+ border:1px solid rgba(111,190,163,.32);
+ border-left:4px solid #70d4b3;
+ color:#e4fff5;
+ box-shadow:inset 0 1px 0 rgba(255,255,255,.035);
+}
 </style>
