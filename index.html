@@ -517,3 +517,14 @@ document.getElementById("toggle").onclick=()=>{const ds=[...document.querySelect
 @media(max-width:620px){#summary .sum.blue,#summary .sum.green{aspect-ratio:1.55/1;padding:8px 7px;justify-content:center;align-items:center;text-align:center}#summary .sum.blue .lab,#summary .sum.green .lab{margin:0;line-height:1.15}#summary .sum.blue .val,#summary .sum.green .val{margin-top:5px;line-height:1.1;font-size:clamp(20px,6.2vw,29px);letter-spacing:-.035em}}
 @media(min-width:621px){#summary .sum.blue,#summary .sum.green{aspect-ratio:1.75/1;padding:12px;justify-content:center;align-items:center;text-align:center}#summary .sum.blue .val,#summary .sum.green .val{font-size:clamp(28px,3vw,42px);margin-top:6px}}
 </style>
+
+<style>
+/* Polished Vahan achievement card: clear hierarchy, compact labels and a distinct progress figure. */
+#summary .sum.purple{display:grid;grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"status status" "label label" "value note";align-items:end;column-gap:14px;row-gap:7px;padding:20px 22px;border:1px solid rgba(147,197,253,.24);box-shadow:inset 0 1px 0 rgba(255,255,255,.06),0 10px 24px rgba(0,0,0,.12);}
+#summary .sum.purple .vahan-status{grid-area:status;display:inline-flex;align-items:center;justify-self:start;width:max-content;max-width:100%;padding:5px 9px;border:1px solid rgba(230,189,130,.35);border-radius:999px;background:rgba(230,189,130,.09);color:#f0d5a8;font-size:clamp(9px,2.4vw,11px);font-weight:800;letter-spacing:.07em;line-height:1.25;margin:0;text-transform:uppercase;}
+#summary .sum.purple .lab{grid-area:label;margin:0;color:#d7e3f7;font-size:clamp(10px,2.8vw,13px);font-weight:800;letter-spacing:.09em;line-height:1.25;}
+#summary .sum.purple .val{grid-area:value;margin:0;color:#fff;font-size:clamp(30px,8vw,42px);font-weight:850;letter-spacing:-.04em;line-height:1.05;}
+#summary .sum.purple .note{grid-area:note;justify-self:end;margin:0 0 3px;padding:7px 10px;border-radius:10px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.09);color:#dbe7fa;font-size:12px;font-weight:650;white-space:nowrap;}
+@media(min-width:621px){#summary .sum.purple{padding:22px 26px;row-gap:9px}#summary .sum.purple .val{font-size:clamp(34px,3.2vw,46px)}}
+@media(max-width:360px){#summary .sum.purple{padding:15px 14px;column-gap:8px}#summary .sum.purple .vahan-status{letter-spacing:.035em}#summary .sum.purple .note{font-size:11px;padding:6px 7px}}
+</style>
