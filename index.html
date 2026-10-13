@@ -276,8 +276,7 @@ body{background:#0b0e13;color:#e9edf5}
 .brand-lockup .ddp-wordmark{width:min(94vw,650px)!important;margin:0 auto 12px}
 #splash .ddp-wordmark{width:min(96vw,850px)!important;margin:0 auto 18px}
 </style>
-<script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js">loadDealerWorkbook();
-</script><script>/* Always play the branded intro on a fresh page load so the animation is visible on every visit. */</script>
+<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script><script>/* Always play the branded intro on a fresh page load so the animation is visible on every visit. */</script>
 </head><body>
 <div id="splash"><div class="splash-brand"><img class="ddp-logo-image" src="bf2170c9-019e-4032-ad99-cdb14017a275.jpg" alt="Dealer Dhan Portal"><div class="splash-title">DEALER DHAN PORTAL</div></div></div><section id="loginPage" class="login-wrap intro-roll"><form id="loginForm" class="login" onsubmit="login(event); return false;"><div class="brand-lockup"><img class="ddp-logo-image" src="bf2170c9-019e-4032-ad99-cdb14017a275.jpg" alt="Dealer Dhan Portal"></div><div class="field"><label>Dealer Code</label><input id="code" autocomplete="username" placeholder="Enter dealer code"></div><div class="field password-field"><label for="pwd">Password</label><div class="password-input-wrap"><input id="pwd" type="password" autocomplete="current-password" placeholder="Enter password"><button id="togglePassword" class="password-visibility" type="button" aria-label="Show password" aria-pressed="false" title="Show password"><svg class="eye-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12Z"></path><circle cx="12" cy="12" r="3"></circle></svg></button></div></div><label class="remember-login"><input id="rememberLogin" type="checkbox" checked> Remember last login on this device</label><div id="err" class="err"></div><button class="primary" type="submit" disabled>Loading scheme data…</button><div class="data-stamp">Data last updated: <span>11 Oct 2026, 12:00 PM</span></div></form></section>
 <section id="app" class="wrap" style="display:none"><div id="summary" class="summary"></div><div class="toolbar"><h3>My Schemes</h3><button class="toggle" id="toggle">Expand all</button></div><div class="hint">Open a scheme to view achievement, gaps, current earnings, potential earnings and conditions.</div><div id="schemes" class="schemes"></div><div class="top"><div class="dealer-title"><div class="dealer-name-line"><h2 id="dealerName"></h2><span class="code-label">Dealer Code:</span><span id="dealerCode" class="code"></span></div><div class="disclaimer">All Scheme achievement and payout status are tentative. For more information kindly contact regional office team.</div></div><div class="header-right"><img class="nexa-official-logo" src="CENTRAL%204.png" alt="NEXA logo"><div class="actions"><button class="secondary" id="logout">Logout</button></div></div></div></section>
@@ -359,7 +358,8 @@ async function loadDealerWorkbook(){
  }
 }
 
- document.getElementById("toggle").onclick=()=>{const ds=[...document.querySelectorAll("details.scheme")],open=ds.some(x=>!x.open);ds.forEach(x=>x.open=open);document.getElementById("toggle").textContent=open?"Collapse all":"Expand all"};
+ loadDealerWorkbook();
+document.getElementById("toggle").onclick=()=>{const ds=[...document.querySelectorAll("details.scheme")],open=ds.some(x=>!x.open);ds.forEach(x=>x.open=open);document.getElementById("toggle").textContent=open?"Collapse all":"Expand all"};
 </script></body></html>
 <style>
 /* Use the supplied logo image as-is; keep it clear and unframed. */
