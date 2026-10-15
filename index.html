@@ -363,7 +363,56 @@ async function loadDealerWorkbook(){
 
  loadDealerWorkbook();
 document.getElementById("toggle").onclick=()=>{const ds=[...document.querySelectorAll("details.scheme")],open=ds.some(x=>!x.open);ds.forEach(x=>x.open=open);document.getElementById("toggle").textContent=open?"Collapse all":"Expand all"};
-</script></body></html>
+</script><style>
+
+/* Navratri login visual theme — CSS-only design refresh; all existing text and login behavior preserved. */
+:root{--navy:#03142d;--blue:#0b2b50;--indigo:#12345a;--gold:#e8b85c;--festive-gold:#ffd887;--muted:#b8c6d9}
+html{background:#031126}
+body{background:
+ radial-gradient(ellipse at 50% 105%,rgba(190,111,24,.24),transparent 38rem),
+ radial-gradient(ellipse at 8% 16%,rgba(224,153,43,.16),transparent 22rem),
+ radial-gradient(ellipse at 92% 12%,rgba(224,153,43,.13),transparent 22rem),
+ linear-gradient(145deg,#020b1b 0%,#061b37 52%,#020a18 100%);color:#f8fafc;overflow-x:hidden}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.55;background:
+ radial-gradient(ellipse at 50% 0%,transparent 0 16%,rgba(232,184,92,.13) 16.1% 16.25%,transparent 16.4%),
+ repeating-radial-gradient(circle at 12% 12%,transparent 0 22px,rgba(232,184,92,.075) 23px 24px,transparent 25px 42px),
+ repeating-radial-gradient(circle at 88% 13%,transparent 0 22px,rgba(232,184,92,.07) 23px 24px,transparent 25px 42px);mask-image:linear-gradient(to bottom,#000,transparent 80%);z-index:0}
+.login-wrap{position:relative;z-index:1;min-height:100svh;padding:clamp(18px,4vw,46px);background:
+ radial-gradient(ellipse at 50% 100%,rgba(232,184,92,.08),transparent 45%),
+ linear-gradient(180deg,transparent,rgba(1,8,20,.12))}
+.login-wrap:before,.login-wrap:after{content:"";position:absolute;top:0;width:clamp(42px,8vw,100px);height:clamp(160px,35vh,300px);pointer-events:none;opacity:.92;background:
+ radial-gradient(ellipse at 50% 8%,#f9d57e 0 3px,transparent 4px),
+ radial-gradient(ellipse at 50% 27%,#dc8d22 0 5px,transparent 6px),
+ radial-gradient(ellipse at 50% 48%,#f4bd4e 0 4px,transparent 5px),
+ radial-gradient(ellipse at 50% 69%,#dc8d22 0 5px,transparent 6px),
+ linear-gradient(90deg,transparent 48%,rgba(239,180,67,.7) 49% 51%,transparent 52%);filter:drop-shadow(0 0 8px rgba(255,180,52,.35))}
+.login-wrap:before{left:clamp(4px,3vw,34px);border-top:2px solid rgba(232,184,92,.6);border-radius:0 0 50% 50%}
+.login-wrap:after{right:clamp(4px,3vw,34px);border-top:2px solid rgba(232,184,92,.6);border-radius:0 0 50% 50%}
+.login{width:min(440px,100%);padding:clamp(24px,4vw,36px) clamp(20px,4vw,34px);color:#f8fafc;background:linear-gradient(145deg,rgba(5,22,45,.97),rgba(4,15,32,.96));border:1px solid rgba(244,196,101,.9);border-radius:24px;box-shadow:0 24px 80px rgba(0,0,0,.42),0 0 0 5px rgba(232,184,92,.045),inset 0 1px 0 rgba(255,255,255,.09);backdrop-filter:blur(14px)}
+.login:before{height:3px;background:linear-gradient(90deg,transparent,#e8b85c,#fff0b9,#e8b85c,transparent)}
+.brand-lockup{margin-bottom:18px}
+.brand-lockup .ddp-logo-image{max-width:min(190px,64%);height:auto;filter:drop-shadow(0 0 12px rgba(232,184,92,.18))}
+.field label{color:#d7e3f5}
+.field input{color:#fff;background:linear-gradient(135deg,rgba(255,255,255,.09),rgba(255,255,255,.045));border:1px solid rgba(175,197,226,.23);border-radius:11px}
+.field input::placeholder{color:#aebdd2}
+.field input:focus{background:rgba(255,255,255,.1);border-color:#f1c46a;box-shadow:0 0 0 3px rgba(232,184,92,.14)}
+.remember-login{color:#bdcce0}
+.remember-login input{accent-color:#e8b85c}
+.primary{color:#1b160a;background:linear-gradient(180deg,#ffe5a1 0%,#e8b85c 56%,#c98b2e 100%);box-shadow:0 8px 24px rgba(214,151,47,.2);font-weight:850}
+.primary:hover{filter:brightness(1.06)}
+.data-stamp{color:#c6d2e3;border:0;background:transparent;padding-top:13px;font-size:10px}
+.data-stamp span{color:#ffe0a0}
+.err{background:#3b111c;color:#ffd6dd;border-color:#7f2938}
+#splash{background:radial-gradient(ellipse at 50% 100%,#163b64,#06172f 54%,#020814);z-index:9999}
+@media(max-width:620px){
+ .login-wrap{padding:24px 18px;align-items:center}
+ .login{width:min(440px,100%);padding:25px 20px;border-radius:22px}
+ .login-wrap:before,.login-wrap:after{height:145px;width:42px;opacity:.7}
+ .brand-lockup .ddp-logo-image{max-width:158px}
+}
+@media(prefers-reduced-motion:reduce){.login-wrap:before,.login-wrap:after{filter:none}}
+</style>
+</body></html>
 <style>
 /* Use the supplied logo image as-is; keep it clear and unframed. */
 .ddp-logo-image{display:block;width:clamp(240px,82vw,620px);max-width:100%;height:auto;object-fit:contain;margin:0 auto;opacity:0;animation:ddpLogoFade 1s ease .12s forwards}
