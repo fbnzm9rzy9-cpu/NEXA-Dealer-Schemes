@@ -364,6 +364,10 @@ async function loadDealerWorkbook(){
  loadDealerWorkbook();
 document.getElementById("toggle").onclick=()=>{const ds=[...document.querySelectorAll("details.scheme")],open=ds.some(x=>!x.open);ds.forEach(x=>x.open=open);document.getElementById("toggle").textContent=open?"Collapse all":"Expand all"};
 </script>
+<style>
+/* Ensure the My Schemes heading is readable in white. */
+.toolbar h3{color:#fff!important}
+</style>
 </body></html>
 <style>
 /* Use the supplied logo image as-is; keep it clear and unframed. */
