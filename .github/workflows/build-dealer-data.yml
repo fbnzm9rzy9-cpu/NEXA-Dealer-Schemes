@@ -1,0 +1,62 @@
+name: Build dealer data asset
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'All Scheme Portal Data.xlsx'
+      - '.github/workflows/build-dealer-data.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install openpyxl
+      - name: Convert workbook to dealer-data.json
+        run: |
+          python - <<'PY'
+          import openpyxl, json
+          from pathlib import Path
+          wb=openpyxl.load_workbook('All Scheme Portal Data.xlsx', data_only=True, read_only=True)
+          ws=wb[wb.sheetnames[0]]
+          def val(row,col):
+              x=ws[f'{col}{row}'].value
+              return x
+          def num(row,col):
+              x=val(row,col)
+              if x is None or x=='': return 0
+              try: return float(x) if isinstance(x,float) else int(x) if isinstance(x,int) else float(x)
+              except: return 0
+          def st(row,col,default=''):
+              x=val(row,col)
+              return default if x is None or x=='' else str(x).strip()
+          fresh={}
+          for row in range(12,31):
+              code=st(row,'C').upper()
+              if not code: continue
+              fresh[code]={
+                'name':st(row,'B'),'code':code,'password':st(row,'D'),
+                'vahan':dict(tgt=num(row,'F'),ach=num(row,'G'),pend=num(row,'H'),pipe=num(row,'I'),gap=num(row,'J'),cur=num(row,'K'),pot=num(row,'L'),qual=st(row,'M','Not Qualified')),
+                'pp':dict(base=num(row,'O'),req=num(row,'P'),ach=num(row,'Q'),gap=num(row,'R'),pq1=num(row,'S'),pcur=num(row,'T'),pgr=num(row,'U'),pot=num(row,'V'),cur=num(row,'W'),qual=st(row,'X','Not Qualified')),
+                'psl':dict(grp=st(row,'Z'),rank=st(row,'AA'),sb=num(row,'AB'),sa=num(row,'AC'),sg=num(row,'AD'),pb=num(row,'AE'),pr=num(row,'AF'),pgr=num(row,'AG'),qb=num(row,'AH'),qa=num(row,'AI'),qg=num(row,'AJ'),octbase=num(row,'AK'),octachi=num(row,'AL'),octgrowth=num(row,'AM'),qual='Qualified' if num(row,'AD')>=0 else 'Not Qualified'),
+                'nac':dict(base=num(row,'AO'),ach=num(row,'AP'),g1=num(row,'AQ'),g2=num(row,'AR'),g3=num(row,'AS'),g4=num(row,'AT'),gvq3=num(row,'AU'),req=num(row,'AV'),gach=num(row,'AW'),ggap=num(row,'AX'),wtgt=num(row,'AY'),wach=num(row,'AZ'),wpct=num(row,'BA'),cur=num(row,'BB'),pot=num(row,'BC'),qual=st(row,'BD','Not Qualified')),
+                'mega':dict(tgt=num(row,'BF'),ach=num(row,'BG'),achp=num(row,'BH'),dms=num(row,'BI'),dmsp=num(row,'BJ'),slab=st(row,'BK','No Slab'),gt=num(row,'BL'),ga=num(row,'BM'),gp=num(row,'BN'),it=num(row,'BO'),ia=num(row,'BP'),ip=num(row,'BQ'),xt=num(row,'BR'),xa=num(row,'BS'),xp=num(row,'BT'),jt=num(row,'BU'),ja=num(row,'BV'),jp=num(row,'BW'),cur=num(row,'BX'),pot=num(row,'BY'),qual=st(row,'BZ','Not Qualified')),
+                'gvsc':dict(tgt=num(row,'CB'),ach=num(row,'CC'),pct=num(row,'CD'),cur=num(row,'CE'),pot=num(row,'CF'),qual=st(row,'CG','Not Qualified')),
+                'tdd':dict(tgt=num(row,'CI'),ach=num(row,'CJ'),pct=num(row,'CK'),wsTgt=num(row,'CL'),wsAch=num(row,'CM'),wsAchi2=num(row,'CN'),sig=num(row,'CO'),dlt=num(row,'CP'),cur=num(row,'CQ'),pot=num(row,'CR'),qual=st(row,'CS','Not Qualified')),
+                'elevate':dict(base=num(row,'CU'),retail=num(row,'CV'),growth=num(row,'CW'),hbase=num(row,'CX'),hretail=num(row,'CY'),hgrowth=num(row,'CZ'),incremental=num(row,'DA'),slab=st(row,'DB','No Slab'),cur=num(row,'DC'),pot=num(row,'DD'),qual=st(row,'DE','Not Qualified')),
+                'rural':dict(base=num(row,'DG'),ach=num(row,'DH'),gaps=[num(row,'DI'),num(row,'DJ'),num(row,'DK'),num(row,'DL')],extraBase=num(row,'DN'),extraAch=num(row,'DO'),extraGaps=[num(row,'DP'),num(row,'DQ'),num(row,'DR'),num(row,'DS')],qualBase=num(row,'DT'),qualAch=num(row,'DU'),qualGrowth=num(row,'DV'),cur=num(row,'DW'),pot=num(row,'DX'),qual=st(row,'DY','Not Qualified')),
+                'evitara':dict(tgt=num(row,'EA'),ach=num(row,'EB'),pct=num(row,'EC'),cur=num(row,'ED'),pot=num(row,'EE'),qual=st(row,'EF','Not Qualified'))}
+          if not fresh: raise SystemExit('No dealer records found')
+          Path('dealer-data.json').write_text(json.dumps({'updated':'2026-10-21','dealers':fresh},separators=(',',':')),encoding='utf-8')
+          PY
+      - name: Commit generated data asset
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add dealer-data.json
+          git diff --cached --quiet || (git commit -m "Build dealer data asset from workbook" && git push)
