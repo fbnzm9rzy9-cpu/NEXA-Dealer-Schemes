@@ -332,15 +332,19 @@ function ensureXLSX(){
   'https://unpkg.com/xlsx@0.18.5/dist/xlsx.full.min.js'
  ];
  window._xlsxLoadPromise=new Promise((resolve,reject)=>{
-  let index=0;
+  let index=0,finished=false,timer;
+  const finish=(err)=>{if(finished)return;finished=true;clearTimeout(timer);err?reject(err):resolve()};
   const next=()=>{
-   if(window.XLSX&&typeof window.XLSX.read==='function'){resolve();return}
-   if(index>=sources.length){reject(new Error('All spreadsheet-reader sources failed'));return}
+   if(window.XLSX&&typeof window.XLSX.read==='function'){finish();return}
+   if(index>=sources.length){finish(new Error('Spreadsheet reader could not load from any source'));return}
    const script=document.createElement('script');
    script.src=sources[index++];
    script.async=true;
-   script.onload=()=>window.XLSX&&typeof window.XLSX.read==='function'?resolve():next();
-   script.onerror=next;
+   let settled=false;
+   const advance=()=>{if(settled)return;settled=true;clearTimeout(timer);next()};
+   timer=setTimeout(advance,3500);
+   script.onload=()=>window.XLSX&&typeof window.XLSX.read==='function'?finish():advance();
+   script.onerror=advance;
    document.head.appendChild(script);
   };
   next();
@@ -391,7 +395,7 @@ async function loadDealerWorkbook(){
  }catch(ex){
   window.dealerDataReady=false;
   if(loginButton){loginButton.disabled=true;loginButton.textContent='Scheme data unavailable'}
-  if(err){err.textContent='Unable to load the latest scheme data. Check your connection and refresh the page.';err.style.display='block'}
+  if(err){err.textContent='Scheme data could not load. Please refresh once; if this continues, contact the portal administrator.';err.style.display='block'}
   console.error('Dealer workbook load failed:',ex);
  }
 }
