@@ -278,7 +278,7 @@ body{background:#0b0e13;color:#e9edf5}
 
 .logout-footer{display:flex;justify-content:center;margin:24px 0 10px;padding-top:16px;border-top:1px solid rgba(255,255,255,.12)}.logout-footer #logout{min-width:220px;min-height:58px;padding:16px 36px;font-size:18px;font-weight:700}
 </style>
-<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script><script>/* Always play the branded intro on a fresh page load so the animation is visible on every visit. */</script>
+<script>/* XLSX is loaded on demand with multiple CDN fallbacks below. */</script><script>/* Always play the branded intro on a fresh page load so the animation is visible on every visit. */</script>
 </head><body>
 <div id="splash"><div class="splash-brand"><img class="ddp-logo-image" src="bf2170c9-019e-4032-ad99-cdb14017a275.jpg" alt="Dealer Dhan Portal"><div class="splash-title">DEALER DHAN PORTAL</div></div></div><section id="loginPage" class="login-wrap intro-roll"><form id="loginForm" class="login" onsubmit="login(event); return false;"><div class="brand-lockup"><img class="ddp-logo-image" src="bf2170c9-019e-4032-ad99-cdb14017a275.jpg" alt="Dealer Dhan Portal"></div><div class="field"><label>Dealer Code</label><input id="code" autocomplete="username" placeholder="Enter dealer code"></div><div class="field password-field"><label for="pwd">Password</label><div class="password-input-wrap"><input id="pwd" type="password" autocomplete="current-password" placeholder="Enter password"><button id="togglePassword" class="password-visibility" type="button" aria-label="Show password" aria-pressed="false" title="Show password"><svg class="eye-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12Z"></path><circle cx="12" cy="12" r="3"></circle></svg></button></div></div><label class="remember-login"><input id="rememberLogin" type="checkbox" checked> Remember last login on this device</label><div id="err" class="err"></div><button class="primary" type="submit" disabled>Loading scheme data…</button><div class="data-stamp">Data last updated: <span>21 Oct 2026, 1:00 PM</span></div></form></section>
 <section id="app" class="wrap" style="display:none"><div class="top"><div class="dealer-title"><div class="dealer-name-line"><h2 id="dealerName"></h2><span class="code-label">Dealer Code:</span><span id="dealerCode" class="code"></span></div><div class="disclaimer">All Scheme achievement and payout status are tentative. For more information kindly contact regional office team.</div></div><div class="header-right"><img class="nexa-official-logo" src="CENTRAL%204.png" alt="NEXA logo"></div></div><div id="summary" class="summary"></div><div class="toolbar"><h3>My Schemes</h3><button class="toggle" id="toggle">Expand all</button></div><div class="hint">Open a scheme to view achievement, gaps, current earnings, potential earnings and conditions.</div><div id="schemes" class="schemes"></div><div class="actions logout-footer"><button class="secondary" id="logout">Logout</button></div></section>
@@ -322,13 +322,46 @@ document.getElementById("togglePassword").addEventListener("click",function(){co
 document.getElementById("logout").onclick=()=>{document.getElementById("app").style.display="none";document.getElementById("loginPage").style.display="grid";document.getElementById("loginForm").reset();document.getElementById("err").style.display="none"};
 
 window.dealerDataReady=false;
+function ensureXLSX(){
+ if(window.XLSX&&typeof window.XLSX.read==='function')return Promise.resolve();
+ if(window._xlsxLoadPromise)return window._xlsxLoadPromise;
+ const sources=[
+  'https://cdn.sheetjs.com/xlsx-0.18.5/package/dist/xlsx.full.min.js',
+  'https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js',
+  'https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js',
+  'https://unpkg.com/xlsx@0.18.5/dist/xlsx.full.min.js'
+ ];
+ window._xlsxLoadPromise=new Promise((resolve,reject)=>{
+  let index=0;
+  const next=()=>{
+   if(window.XLSX&&typeof window.XLSX.read==='function'){resolve();return}
+   if(index>=sources.length){reject(new Error('All spreadsheet-reader sources failed'));return}
+   const script=document.createElement('script');
+   script.src=sources[index++];
+   script.async=true;
+   script.onload=()=>window.XLSX&&typeof window.XLSX.read==='function'?resolve():next();
+   script.onerror=next;
+   document.head.appendChild(script);
+  };
+  next();
+ });
+ return window._xlsxLoadPromise;
+}
 async function loadDealerWorkbook(){
  const loginButton=document.querySelector('#loginForm button[type="submit"]');
  const err=document.getElementById('err');
  try{
-  if(!window.XLSX) throw new Error(window.dealerWorkbookScriptFailed?'Spreadsheet reader script failed to load':'Spreadsheet reader did not load');
-  const response=await fetch('./All%20Scheme%20Portal%20Data.xlsx?ts='+Date.now(),{cache:'no-store'});
-  if(!response.ok) throw new Error('Workbook request failed ('+response.status+')');
+  await ensureXLSX();
+  const assetPaths=['./All%20Scheme%20Portal%20Data.xlsx','./All%20Scheme%20Portal%20Data%2810%29.xlsx'];
+  let response=null,lastStatus='';
+  for(const path of assetPaths){
+   try{
+    const candidate=await fetch(path+'?v=20261021-2',{cache:'no-store'});
+    if(candidate.ok){response=candidate;break}
+    lastStatus='HTTP '+candidate.status+' for '+path;
+   }catch(fetchError){lastStatus=fetchError.message}
+  }
+  if(!response)throw new Error('Workbook asset could not be loaded: '+lastStatus);
   const workbook=XLSX.read(await response.arrayBuffer(),{type:'array'});
   const sheet=workbook.Sheets[workbook.SheetNames[0]];
   const val=(row,col)=>{const x=sheet[col+row];return x&&x.v!==undefined?x.v:null};
