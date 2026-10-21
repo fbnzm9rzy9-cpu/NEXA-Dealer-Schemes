@@ -322,72 +322,16 @@ document.getElementById("togglePassword").addEventListener("click",function(){co
 document.getElementById("logout").onclick=()=>{document.getElementById("app").style.display="none";document.getElementById("loginPage").style.display="grid";document.getElementById("loginForm").reset();document.getElementById("err").style.display="none"};
 
 window.dealerDataReady=false;
-function ensureXLSX(){
- if(window.XLSX&&typeof window.XLSX.read==='function')return Promise.resolve();
- if(window._xlsxLoadPromise)return window._xlsxLoadPromise;
- const sources=[
-  'https://cdn.sheetjs.com/xlsx-0.18.5/package/dist/xlsx.full.min.js',
-  'https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js',
-  'https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js',
-  'https://unpkg.com/xlsx@0.18.5/dist/xlsx.full.min.js'
- ];
- window._xlsxLoadPromise=new Promise((resolve,reject)=>{
-  let index=0,finished=false,timer;
-  const finish=(err)=>{if(finished)return;finished=true;clearTimeout(timer);err?reject(err):resolve()};
-  const next=()=>{
-   if(window.XLSX&&typeof window.XLSX.read==='function'){finish();return}
-   if(index>=sources.length){finish(new Error('Spreadsheet reader could not load from any source'));return}
-   const script=document.createElement('script');
-   script.src=sources[index++];
-   script.async=true;
-   let settled=false;
-   const advance=()=>{if(settled)return;settled=true;clearTimeout(timer);next()};
-   timer=setTimeout(advance,3500);
-   script.onload=()=>window.XLSX&&typeof window.XLSX.read==='function'?finish():advance();
-   script.onerror=advance;
-   document.head.appendChild(script);
-  };
-  next();
- });
- return window._xlsxLoadPromise;
-}
 async function loadDealerWorkbook(){
  const loginButton=document.querySelector('#loginForm button[type="submit"]');
  const err=document.getElementById('err');
  try{
-  await ensureXLSX();
-  const assetPaths=['./All%20Scheme%20Portal%20Data.xlsx','./All%20Scheme%20Portal%20Data%2810%29.xlsx'];
-  let response=null,lastStatus='';
-  for(const path of assetPaths){
-   try{
-    const candidate=await fetch(path+'?v=20261021-2',{cache:'no-store'});
-    if(candidate.ok){response=candidate;break}
-    lastStatus='HTTP '+candidate.status+' for '+path;
-   }catch(fetchError){lastStatus=fetchError.message}
-  }
-  if(!response)throw new Error('Workbook asset could not be loaded: '+lastStatus);
-  const workbook=XLSX.read(await response.arrayBuffer(),{type:'array'});
-  const sheet=workbook.Sheets[workbook.SheetNames[0]];
-  const val=(row,col)=>{const x=sheet[col+row];return x&&x.v!==undefined?x.v:null};
-  const n=(row,col)=>{const x=val(row,col);if(x===null||x==='')return 0;const z=Number(x);return Number.isFinite(z)?z:0};
-  const s=(row,col,def='')=>{const x=val(row,col);return x===null||x===''?def:String(x).trim()};
-  const fresh={};
-  for(let row=12;row<=29;row++){
-   const code=s(row,'C').toUpperCase();
-   if(!code)continue;
-   const d={name:s(row,'B'),code,password:s(row,'D'),
-    vahan:{tgt:n(row,'F'),ach:n(row,'G'),pend:n(row,'H'),pipe:n(row,'I'),gap:n(row,'J'),cur:n(row,'K'),pot:n(row,'L'),qual:s(row,'M','Not Qualified')},
-    pp:{base:n(row,'O'),req:n(row,'P'),ach:n(row,'Q'),gap:n(row,'R'),pq1:n(row,'S'),pcur:n(row,'T'),pgr:n(row,'U'),pot:n(row,'V'),cur:n(row,'W'),qual:s(row,'X','Not Qualified')},
-    psl:{grp:s(row,'Z'),rank:s(row,'AA'),sb:n(row,'AB'),sa:n(row,'AC'),sg:n(row,'AD'),pb:n(row,'AE'),pr:n(row,'AF'),pgr:n(row,'AG'),qb:n(row,'AH'),qa:n(row,'AI'),qg:n(row,'AJ'),octbase:n(row,'AK'),octachi:n(row,'AL'),octgrowth:n(row,'AM'),qual:(n(row,'AD')>=0?'Qualified':'Not Qualified')},
-    nac:{base:n(row,'AO'),ach:n(row,'AP'),g1:n(row,'AQ'),g2:n(row,'AR'),g3:n(row,'AS'),g4:n(row,'AT'),gvq3:n(row,'AU'),req:n(row,'AV'),gach:n(row,'AW'),ggap:n(row,'AX'),wtgt:n(row,'AY'),wach:n(row,'AZ'),wpct:n(row,'BA'),cur:n(row,'BB'),pot:n(row,'BC'),qual:s(row,'BD','Not Qualified')},
-    mega:{tgt:n(row,'BF'),ach:n(row,'BG'),achp:n(row,'BH'),dms:n(row,'BI'),dmsp:n(row,'BJ'),slab:s(row,'BK','No Slab'),gt:n(row,'BL'),ga:n(row,'BM'),gp:n(row,'BN'),it:n(row,'BO'),ia:n(row,'BP'),ip:n(row,'BQ'),xt:n(row,'BR'),xa:n(row,'BS'),xp:n(row,'BT'),jt:n(row,'BU'),ja:n(row,'BV'),jp:n(row,'BW'),cur:n(row,'BX'),pot:n(row,'BY'),qual:s(row,'BZ','Not Qualified')},
-    gvsc:{tgt:n(row,'CB'),ach:n(row,'CC'),pct:n(row,'CD'),cur:n(row,'CE'),pot:n(row,'CF'),qual:s(row,'CG','Not Qualified')},
-    tdd:{tgt:n(row,'CI'),ach:n(row,'CJ'),pct:n(row,'CK'),wsTgt:n(row,'CL'),wsAch:n(row,'CM'),wsAchi2:n(row,'CN'),sig:n(row,'CO'),dlt:n(row,'CP'),cur:n(row,'CQ'),pot:n(row,'CR'),qual:s(row,'CS','Not Qualified')},
-    elevate:{base:n(row,'CU'),retail:n(row,'CV'),growth:n(row,'CW'),hbase:n(row,'CX'),hretail:n(row,'CY'),hgrowth:n(row,'CZ'),incremental:n(row,'DA'),slab:s(row,'DB','No Slab'),cur:n(row,'DC'),pot:n(row,'DD'),qual:s(row,'DE','Not Qualified')},rural:{base:n(row,'DG'),ach:n(row,'DH'),gaps:[n(row,'DI'),n(row,'DJ'),n(row,'DK'),n(row,'DL')],extraBase:n(row,'DN'),extraAch:n(row,'DO'),extraGaps:[n(row,'DP'),n(row,'DQ'),n(row,'DR'),n(row,'DS')],qualBase:n(row,'DT'),qualAch:n(row,'DU'),qualGrowth:n(row,'DV'),cur:n(row,'DW'),pot:n(row,'DX'),qual:s(row,'DY','Not Qualified')},evitara:{tgt:n(row,'EA'),ach:n(row,'EB'),pct:n(row,'EC'),cur:n(row,'ED'),pot:n(row,'EE'),qual:s(row,'EF','Not Qualified')}};
-   // Keep the official status wording as supplied by the workbook, while accepting minor spelling variants.
-   fresh[code]=d;
-  }
-  if(Object.keys(fresh).length<1)throw new Error('No dealer rows were found in the workbook');
+  // Read the preprocessed data asset; no Excel parser or third-party CDN is needed at login.
+  const response=await fetch('./dealer-data.json?v=20261021-0817',{cache:'no-store'});
+  if(!response.ok)throw new Error('Dealer data asset unavailable ('+response.status+')');
+  const payload=await response.json();
+  const fresh=payload&&payload.dealers;
+  if(!fresh||Object.keys(fresh).length<1)throw new Error('Dealer data asset is empty');
   DEALERS=fresh;
   window.dealerDataReady=true;
   if(loginButton){loginButton.disabled=false;loginButton.textContent='Login'}
@@ -395,12 +339,12 @@ async function loadDealerWorkbook(){
  }catch(ex){
   window.dealerDataReady=false;
   if(loginButton){loginButton.disabled=true;loginButton.textContent='Scheme data unavailable'}
-  if(err){err.textContent='Scheme data could not load. Please refresh once; if this continues, contact the portal administrator.';err.style.display='block'}
-  console.error('Dealer workbook load failed:',ex);
+  if(err){err.textContent='Dealer data is being prepared. Refresh this page in a moment.';err.style.display='block'}
+  console.error('Dealer data load failed:',ex);
  }
 }
+loadDealerWorkbook();
 
- loadDealerWorkbook();
 document.getElementById("toggle").onclick=()=>{const ds=[...document.querySelectorAll("details.scheme")],open=ds.some(x=>!x.open);ds.forEach(x=>x.open=open);document.getElementById("toggle").textContent=open?"Collapse all":"Expand all"};
 </script>
 <style>
